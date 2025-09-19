@@ -1,0 +1,65 @@
+<x-app-layout>
+    <div class="py-4">
+        <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-8">
+                <h1 class="text-2xl text-white mb-4 font-bold ">{{ $post->title }}</h1>
+
+                {{-- User Profile --}}
+
+                <div class="flex gap-4">
+                    <x-user-profile :user="$post->user" />
+
+                    {{-- Profile Section --}}
+
+                    <div class="text-white">
+                        <div class="flex gap-2">
+                            <a href="{{ route('profile.show', $post->user) }}"
+                                class="hover:underline">{{ $post->user->name }}</a>
+
+
+                            @if (!Auth::user()->is($post->user))
+                                &middot;
+                                <a href="#" class="text-emerald-500">Follow</a>
+                            @endif
+                        </div>
+                        <div class="flex gap-2 text-gray-400 text-sm">
+                            {{ $post->readTime() }} min read
+                            &middot;
+                            {{ $post->created_at->format('M d, Y') }}
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {{-- Like Section --}}
+
+                <x-clap-button>
+
+                </x-clap-button>
+
+                {{-- Content Section --}}
+                <div class="mt-4">
+                    <img src="{{ $post->imageUrl() }}" alt="{{ $post->title }}"
+                        class="w-full h-full object-cover rounded-lg">
+
+                    <div class="mt-4 text-white">
+                        <p>{{ $post->content }}</p>
+                    </div>
+                </div>
+
+                <div class="mt-8 text-white">
+                    <span class="px-4 py-2 bg-gray-500 rounded-lg">
+                        {{ $post->category->name }}
+                    </span>
+                </div>
+
+                {{-- Like Section --}}
+
+                <x-clap-button></x-clap-button>
+
+            </div>
+        </div>
+    </div>
+
+</x-app-layout>
