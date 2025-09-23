@@ -12,16 +12,19 @@
                     {{-- Profile Section --}}
 
                     <div class="text-white">
-                        <div class="flex gap-2">
+                        <x-follow-ctr :user="$post->user" class="flex gap-2">
                             <a href="{{ route('profile.show', $post->user) }}"
                                 class="hover:underline">{{ $post->user->name }}</a>
 
 
                             @if (!Auth::user()->is($post->user))
                                 &middot;
-                                <a href="#" class="text-emerald-500">Follow</a>
+                                <a href="#" x-text="following ? 'UnFollow' : 'Follow'"
+                                    @click="follow()" :class="following ? 'text-red-500 hover:underline' : 'text-emerald-500 hover:underline' ">
+                                    
+                                </a>
                             @endif
-                        </div>
+                        </x-follow-ctr>
                         <div class="flex gap-2 text-gray-400 text-sm">
                             {{ $post->readTime() }} min read
                             &middot;
@@ -34,9 +37,10 @@
 
                 {{-- Like Section --}}
 
-                <x-clap-button>
+                <x-clap-button :post="$post">
 
                 </x-clap-button>
+                
 
                 {{-- Content Section --}}
                 <div class="mt-4">
@@ -56,7 +60,9 @@
 
                 {{-- Like Section --}}
 
-                <x-clap-button></x-clap-button>
+                <x-clap-button :post="$post">
+
+                </x-clap-button>
 
             </div>
         </div>

@@ -1,1 +1,1 @@
-<img src="/images/logo.png" class="h-40 w-100" alt="logo">
+<img src="/images/orium.png" class="h-40 w-100" alt="logo">

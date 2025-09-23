@@ -20,25 +20,15 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var list<string>
      */
-    
-    protected $fillable = [
-        'image',
-        'username',
-        'name',
-        'email',
-        'password',
-        'bio',
-    ];
+
+    protected $fillable = ['image', 'username', 'name', 'email', 'password', 'bio'];
 
     /**
      * The attributes that should be hidden for serialization.
      *
      * @var list<string>
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
 
     /**
      * Get the attributes that should be cast.
@@ -58,11 +48,31 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Post::class);
     }
 
-    public function imageUrl(){
-        if($this->image){
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id');
+    }
+
+    public function following()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id');
+    }
+    public function imageUrl()
+    {
+        if ($this->image) {
             return Storage::url($this->image);
         } else {
             return null;
         }
+    }
+
+    public function isFollowedBy(User $user)
+    {
+        return $this->followers()->where('follower_id', $user->id)->exists();
+    }
+
+    public function hasClapped(Post $post)
+    {
+        return $post->claps()->where('user_id', $this->id)->exists();
     }
 }

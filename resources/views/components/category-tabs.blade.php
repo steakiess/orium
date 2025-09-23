@@ -1,17 +1,20 @@
  <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400 justify-center">
      <li class="me-2">
-         <x-primary-button>
-             <a href="#" class="" aria-current="page">
+         <a href="/"
+             class="{{ request('category')
+                 ? 'inline-block px-4 py-2 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white active'
+                 : 'inline-block px-4 py-2 text-white bg-gray-700 rounded-lg' }}">
 
-                 All
+             All
 
-             </a>
-         </x-primary-button>
+         </a>
      </li>
      @foreach ($categories as $category)
          <li class="me-2">
-             <a href="#"
-                 class="inline-block px-4 py-2 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white">
+             <a href="{{ route('category.posts', $category) }}"
+                 class="{{ Route::currentRouteNamed('category.posts') && request('category')->id == $category->id
+                     ? 'inline-block px-4 py-2 text-white bg-gray-700 rounded-lg'
+                     : 'inline-block px-4 py-2 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white active' }}  ">
                  {{ $category->name }}
              </a>
          </li>

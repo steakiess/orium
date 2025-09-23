@@ -26,23 +26,27 @@
                     </div>
 
                     {{-- SIDEBAR --}}
-                    <div class="w-[320px] border-l px-8">
+                   <x-follow-ctr :user="$user">
                         <x-user-profile :user="$user" size="w-24 h-24" />
                         <h3 class="mt-2">{{ $user->name }}</h3>
-                        <p class="text-gray-400">25k followers</p>
+                        <p class="text-gray-400">
+                            <span x-text="followers"></span> 
+                                followers
+                        </p>
                         <p class="">{{ $user->bio }}</p>
 
-                        {{-- @if (Auth::user()->is($user)) --}}
+                        @if (auth()->user() && !auth()->user()->is($user))
                             <div class="mt-4">
-                                <button class="bg-emerald-600 rounded-full px-4 py-2 hover:bg-emerald-700">
-                                    Follow
+                                <button @click="follow()" class="rounded-full px-4 py-2"
+                                    x-text=" following ? 'Unfollow' : 'Follow' "
+                                    :class="following ? 'bg-red-700 hover:bg-red-800' : 'bg-emerald-700 hover:bg-emereald-700'">
+                                    ">
                                 </button>
                             </div>
-                        {{-- @endif --}}
-
-                    </div>
+                        @endif
+                    </x-follow-ctr>
                 </div>
-            </div> 
+            </div>
         </div>
     </div>
 </x-app-layout>
