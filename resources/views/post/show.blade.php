@@ -16,14 +16,18 @@
                             <a href="{{ route('profile.show', $post->user) }}"
                                 class="hover:underline">{{ $post->user->name }}</a>
 
+                            @auth
 
-                            {{-- @if (!auth()->user()->is($post->user)) --}}
-                                &middot;
-                                <a href="#" x-text="following ? 'UnFollow' : 'Follow'"
-                                    @click="follow()" :class="following ? 'text-red-500 hover:underline' : 'text-emerald-500 hover:underline' ">
-                                    
-                                </a>
-                            {{-- @endif --}}
+
+                                @if (!auth()->user()->is($post->user))
+                                    &middot;
+                                    <a href="#" x-text="following ? 'UnFollow' : 'Follow'" @click="follow()"
+                                        :class="following ? 'text-red-500 hover:underline' : 'text-emerald-500 hover:underline'">
+
+                                    </a>
+                                @endif
+
+                            @endauth
                         </x-follow-ctr>
                         <div class="flex gap-2 text-gray-400 text-sm">
                             {{ $post->readTime() }} min read
@@ -40,7 +44,7 @@
                 <x-clap-button :post="$post">
 
                 </x-clap-button>
-                
+
 
                 {{-- Content Section --}}
                 <div class="mt-4">
