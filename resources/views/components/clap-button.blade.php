@@ -1,7 +1,7 @@
 @props(['post' => 0])
 
 <div x-data="{
-    hasClapped: {{ auth()->user()->hasClapped($post) ? 'true' : 'false' }},
+    hasClapped: {{ auth()->check() && auth()->user()->hasClapped($post) ? 'true' : 'false' }},
     count: {{ $post->claps()->count() }},
     clap() {
       

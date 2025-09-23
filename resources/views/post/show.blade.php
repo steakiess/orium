@@ -17,13 +17,13 @@
                                 class="hover:underline">{{ $post->user->name }}</a>
 
 
-                            @if (!Auth::user()->is($post->user))
+                            {{-- @if (!auth()->user()->is($post->user)) --}}
                                 &middot;
                                 <a href="#" x-text="following ? 'UnFollow' : 'Follow'"
                                     @click="follow()" :class="following ? 'text-red-500 hover:underline' : 'text-emerald-500 hover:underline' ">
                                     
                                 </a>
-                            @endif
+                            {{-- @endif --}}
                         </x-follow-ctr>
                         <div class="flex gap-2 text-gray-400 text-sm">
                             {{ $post->readTime() }} min read
