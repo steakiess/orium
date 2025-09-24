@@ -60,6 +60,11 @@
                                     {{ __('Profile') }}
                                 </x-dropdown-link>
 
+
+                                <x-dropdown-link :href="route('myPost')">
+                                    {{ __('My Post') }}
+                                </x-dropdown-link>
+
                                 <!-- Authentication -->
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
@@ -125,6 +130,10 @@
                 <div class="mt-3 space-y-1">
                     <x-responsive-nav-link :href="route('profile.edit')">
                         {{ __('Profile') }}
+                    </x-responsive-nav-link>
+
+                    <x-responsive-nav-link :href="route('myPost')">
+                        {{ __('My Post') }}
                     </x-responsive-nav-link>
 
                     <!-- Authentication -->
