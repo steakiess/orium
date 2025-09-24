@@ -32,7 +32,7 @@
                         <div class="flex gap-2 text-gray-400 text-sm">
                             {{ $post->readTime() }} min read
                             &middot;
-                            {{ $post->created_at->format('M d, Y') }}
+                            {{ $post->getCreatedAt() }}
                         </div>
 
                     </div>
@@ -62,12 +62,7 @@
                     </span>
                 </div>
 
-                {{-- Like Section --}}
-
-                <x-clap-button :post="$post">
-
-                </x-clap-button>
-
+               
             </div>
         </div>
     </div>

@@ -42,4 +42,8 @@ class Post extends Model
             return null;
         }
     }
+    public function getCreatedAt()
+    {
+        return $this->created_at->format('M d, Y');
+    }
 }
