@@ -7,7 +7,9 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\PostCreateRequest;
+use App\Http\Requests\PostUpdateRequest;
 
 class PostController extends Controller
 {
@@ -19,6 +21,7 @@ class PostController extends Controller
         $user = auth()->user();
 
         $query = Post::with(['user'])
+            ->where('published_at', '<=', now())
             ->withCount('claps')
             ->latest();
 
@@ -83,16 +86,23 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(PostCreateRequest $request, Post $post)
+    public function update(PostUpdateRequest $request, Post $post)
     {
         if ($post->user_id !== Auth::id()) {
             abort(403);
         }
 
         $data = $request->validated();
-        $image = $data['image'];
-        $imagePath = $image->store('posts', 'public');
-        $data['image'] = $imagePath;
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('posts', 'public');
+            $data['image'] = $imagePath;
+
+            // (Optional) delete old image if exists
+            if ($post->image) {
+                Storage::disk('public')->delete($post->image);
+            }
+        }
 
         $post->update($data);
 
@@ -100,7 +110,7 @@ class PostController extends Controller
 
         // }
 
-        return redirect()->route('myPost');
+        return redirect()->route('dashboard');
     }
 
     /**
@@ -117,18 +127,26 @@ class PostController extends Controller
 
     public function category(Category $category)
     {
-        $posts = $category
+        $user = auth()->user();
+
+        $query = $category
             ->posts()
             ->with(['user'])
+            ->where('published_at', '<=', now())
             ->withCount('claps')
-            ->latest()
-            ->simplePaginate(5);
+            ->latest();
+
+        if ($user) {
+            $ids = $user->following()->pluck('users.id');
+            $query->whereIn('user_id', $ids);
+        }
+        $posts = $query->simplePaginate(5);
         return view('post.index', [
             'posts' => $posts,
         ]);
     }
 
-    public function myPost(Category $category)
+    public function myPost(Post $posts)
     {
         $user = auth()->user();
         $posts = $user

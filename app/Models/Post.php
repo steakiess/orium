@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Post extends Model
 {
     use HasFactory;
+    protected $casts = [
+        'published_at' => 'datetime',
+    ];
 
     protected $fillable = ['image', 'title', 'slug', 'user_id', 'published_at', 'content', 'category_id'];
 

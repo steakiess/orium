@@ -7,8 +7,36 @@
         </a>
         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
             {{ Str::words($post->content, 20) }}</p>
-        <a href="#" class="text-sm text-gray-400 flex gap-4">
-            {{ $post->getCreatedAt() }}
+
+
+
+
+        <div class="flex gap-3 items-center text-gray-500 dark:text-gray-400">
+            @if ($post->user->image)
+                <div class="">
+                    <img src="{{ $post->user->imageUrl() }}" alt="{{ $post->user->name }}"
+                        class="flex rounded-full h-12 w-12 object-cover mt-2 mb-2">
+
+                </div>
+            @else
+                <div class="">
+                    <img src="/images/profile.png" alt="profile"
+                        class="flex rounded-full h-12 w-12 object-cover mt-2 mb-2">
+                </div>
+            @endif
+
+
+            <a href="{{ route('profile.show', $post->user) }}" class="hover:underline">
+                {{ $post->user->username }}
+            </a>
+            <span>
+                <strong>
+                    &middot;
+                </strong>
+
+
+            </span>
+            {{ $post->published_at}}
             <span class="inline-flex gap-1 items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-5">
@@ -17,8 +45,11 @@
                 </svg>
                 {{ $post->claps_count }}
             </span>
+        </div>
 
-        </a>
+
+
+
 
 
     </div>

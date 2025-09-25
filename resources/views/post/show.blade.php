@@ -32,7 +32,7 @@
                         <div class="flex gap-2 text-gray-400 text-sm">
                             {{ $post->readTime() }} min read
                             &middot;
-                            {{ $post->getCreatedAt() }}
+                            {{ $post->published_at}}
                         </div>
 
                     </div>
