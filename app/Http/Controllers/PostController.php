@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PostCreateRequest;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\PostCreateRequest;
 
 class PostController extends Controller
 {
@@ -75,23 +76,43 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $categories = Category::get();
+        return view('post.edit', ['post' => $post, 'categories' => $categories]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update(PostCreateRequest $request, Post $post)
     {
-        //
+        if ($post->user_id !== Auth::id()) {
+            abort(403);
+        }
+
+        $data = $request->validated();
+        $image = $data['image'];
+        $imagePath = $image->store('posts', 'public');
+        $data['image'] = $imagePath;
+
+        $post->update($data);
+
+        // if($data['image'] ?? false){
+
+        // }
+
+        return redirect()->route('myPost');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post)
+    public function delete(Post $post)
     {
-        //
+        if ($post->user_id !== Auth::id()) {
+            abort(403);
+        }
+        $post->delete();
+        return redirect()->route('dashboard');
     }
 
     public function category(Category $category)
@@ -107,11 +128,11 @@ class PostController extends Controller
         ]);
     }
 
-
-     public function myPost(Category $category)
+    public function myPost(Category $category)
     {
         $user = auth()->user();
-        $posts = $user->posts()
+        $posts = $user
+            ->posts()
             ->with(['user'])
             ->withCount('claps')
             ->latest()
