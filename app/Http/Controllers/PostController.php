@@ -138,6 +138,7 @@ class PostController extends Controller
 
         if ($user) {
             $ids = $user->following()->pluck('users.id');
+                $ids->push($user->id); 
             $query->whereIn('user_id', $ids);
         }
         $posts = $query->simplePaginate(5);
