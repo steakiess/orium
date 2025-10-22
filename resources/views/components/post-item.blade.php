@@ -1,17 +1,17 @@
-<div class="flex bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 mb-8">
+<div class="flex bg-white border-2 border-black rounded-lg shadow-sm mb-8">
 
     <div class="p-5 flex-1">
         <a href="{{ route('post.show', ['username' => $post->user->username, 'post' => $post->slug]) }}">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">
                 {{ $post->title }}</h5>
         </a>
-        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+        <p class="mb-3 font-normal text-gray-700 ">
             {{ Str::words($post->content, 20) }}</p>
 
 
 
 
-        <div class="flex gap-3 items-center text-gray-500 dark:text-gray-400">
+        <div class="flex gap-3 items-center text-gray-500 ">
             @if ($post->user->image)
                 <div class="">
                     <img src="{{ $post->user->imageUrl() }}" alt="{{ $post->user->name }}"
