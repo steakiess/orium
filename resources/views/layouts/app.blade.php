@@ -21,6 +21,8 @@
     <div class="min-h-screen bg-cover bg-center bg-no-repeat" style="background-image: url('{{ asset('images/background-5.jpg') }}');">
         @include('layouts.navigation')
 
+        
+
         <!-- Page Heading -->
         @isset($header)
             <header class="bg-white dark:bg-white  border-b-2 border-black">

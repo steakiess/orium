@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -20,6 +21,11 @@ class PostController extends Controller
     {
         $user = auth()->user();
 
+        $users = User::latest()
+        ->take(30)
+        ->get();
+    
+
         $query = Post::with(['user'])
             ->where('published_at', '<=', now())
             ->withCount('claps')
@@ -34,6 +40,7 @@ class PostController extends Controller
         $posts = $query->simplePaginate(5);
         return view('post.index', [
             'posts' => $posts,
+            'users' => $users,
         ]);
     }
 
@@ -71,7 +78,10 @@ class PostController extends Controller
      */
     public function show(string $username, Post $post)
     {
-        return view('post.show', ['post' => $post]);
+        $users = User::latest()
+        ->take(30)
+        ->get();
+        return view('post.show', ['post' => $post , 'users' => $users]);
     }
 
     /**
@@ -128,6 +138,9 @@ class PostController extends Controller
     public function category(Category $category)
     {
         $user = auth()->user();
+        $users = User::latest()
+        ->take(30)
+        ->get();
 
         $query = $category
             ->posts()
@@ -144,12 +157,18 @@ class PostController extends Controller
         $posts = $query->simplePaginate(5);
         return view('post.index', [
             'posts' => $posts,
+            'users' => $users,
         ]);
     }
 
     public function myPost(Post $posts)
     {
         $user = auth()->user();
+
+        $users = User::latest()
+        ->take(30)
+        ->get();
+
         $posts = $user
             ->posts()
             ->with(['user'])
@@ -158,6 +177,7 @@ class PostController extends Controller
             ->simplePaginate(5);
         return view('post.index', [
             'posts' => $posts,
+            'users' => $users,
         ]);
     }
 }
