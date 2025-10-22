@@ -1,15 +1,15 @@
 <p align="center">
- <img src="images/orium.png" width="120" alt="Orium Logo" />
+    <img src="public/images/orium.png" width="200" alt="Orium Logo" />
 </p>
 <p align="center">
- <b>A modern social posting platform – Share, Explore, and Connect.</b><br>
- Built with ❤️ using <a href="https://laravel.com" target="_blank">Laravel</a>.
+    <b>A modern social posting platform – Share, Explore, and Connect.</b><br>
+    Built with ❤️ using <a href="https://laravel.com" target="_blank">Laravel</a>.
 </p>
 <p align="center">
- <img src="https://img.shields.io/badge/Laravel-Framework-red?logo=laravel&logoColor=white" />
- <img src="https://img.shields.io/badge/MySQL-Database-blue?logo=mysql&logoColor=white" />
- <img src="https://img.shields.io/badge/TailwindCSS-Design-38B2AC?logo=tailwindcss&logoColor=white" />
- <img src="https://img.shields.io/badge/License-MIT-green" />
+    <img src="https://img.shields.io/badge/Laravel-Framework-red?logo=laravel&logoColor=white" />
+    <img src="https://img.shields.io/badge/MySQL-Database-blue?logo=mysql&logoColor=white" />
+    <img src="https://img.shields.io/badge/TailwindCSS-Design-38B2AC?logo=tailwindcss&logoColor=white" />
+    <img src="https://img.shields.io/badge/License-MIT-green" />
 </p>
 
 ---
@@ -26,43 +26,43 @@
 ## 📸 Screenshots
 
 <p align="center">
- <img src="images/guest-page.png" width="800" alt="Home Feed" />
- <br><em>Public Page</em>
+    <img src="public/images/guest-page.png" width="800" alt="Public Page" />
+    <br><em>Public Page</em>
 </p>
 
 <p align="center">
- <img src="images/login-page.png" width="800" alt="User Profile" />
- <br><em>Login Page</em>
+    <img src="public/images/login-page.png" width="800" alt="Login Page" />
+    <br><em>Login Page</em>
 </p>
 
 <p align="center">
- <img src="images/register-page.png" width="800" alt="Create Post" />
- <br><em>Register Page</em>
+    <img src="public/images/register-page.png" width="800" alt="Register Page" />
+    <br><em>Register Page</em>
 </p>
 
 <p align="center">
- <img src="images/create-post-page.png" width="375" alt="Mobile View" />
- <br><em>Create Post Page</em>
+    <img src="public/images/create-post-page.png" width="800" alt="Create Post Page" />
+    <br><em>Create Post Page</em>
 </p>
 
 <p align="center">
- <img src="images/profile-page.png" width="800" alt="User Profile" />
- <br><em>Profile Page- View posts and followers</em>
+    <img src="public/images/profile-page.png" width="800" alt="Profile Page" />
+    <br><em>Profile Page- View posts and followers</em>
 </p>
 
 <p align="center">
- <img src="images/update-delete-page.png" width="800" alt="User Profile" />
- <br><em>Update & Delete Page</em>
+    <img src="public/images/update-delete-page.png" width="800" alt="Update $ Delete Page" />
+    <br><em>Update & Delete Page</em>
 </p>
 
 <p align="center">
- <img src="images/show-post.png" width="375" alt="Mobile View" />
- <br><em>Post Detail Page</em>
+    <img src="public/images/show-post.png" width="800" alt="Post Detail Page" />
+    <br><em>Post Detail Page</em>
 </p>
 
 <p align="center">
- <img src="images/my-post.png" width="375" alt="Mobile View" />
- <br><em>My Post Page</em>
+    <img src="public/images/my-post.png" width="800" alt="My Post Page" />
+    <br><em>My Post Page</em>
 </p>
 
 ---
